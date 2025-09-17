@@ -1,6 +1,8 @@
+// src/pages/Inicio.jsx
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Info } from "lucide-react";
 
 const Inicio = () => {
   const [hablando, setHablando] = useState(false);
@@ -8,14 +10,26 @@ const Inicio = () => {
   const handleHover = () => {
     if (!hablando) {
       setHablando(true);
-      setTimeout(() => {
-        setHablando(false);
-      }, 5000); // 5 segundos hablando
+      setTimeout(() => setHablando(false), 5000); // 5 segundos hablando
     }
   };
 
   return (
     <div className="relative z-10 min-h-screen flex flex-col items-center text-center px-6 py-12">
+      {/* Botón a Información (solo icono; más grande en desktop) */}
+      <Link
+        to="/informacion"
+        className="fixed top-4 right-4 z-50 inline-flex h-11 w-11 md:h-14 md:w-14 items-center justify-center
+                   rounded-full border border-slate-700 bg-slate-800/70 backdrop-blur
+                   hover:bg-slate-800 transition-shadow shadow-lg
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-900"
+        aria-label="Información"
+        title="Información"
+      >
+        <Info className="h-5 w-5 md:h-7 md:w-7 text-slate-200" />
+        <span className="sr-only">Información</span>
+      </Link>
+
       {/* Título principal */}
       <motion.h1
         className="text-5xl md:text-8xl font-extrabold text-white leading-tight text-center whitespace-normal"
@@ -26,8 +40,6 @@ const Inicio = () => {
         Métodos de<br />
         Programación lineal
       </motion.h1>
-
-
 
       {/* Tarjeta explicativa */}
       <motion.div
@@ -42,7 +54,7 @@ const Inicio = () => {
         </p>
       </motion.div>
 
-      {/* Contenido restante desplazado hacia abajo */}
+      {/* Contenido restante */}
       <div className="mt-16 flex flex-col items-center w-full px-4">
         {/* 🦉 Búho con globo arriba */}
         <div className="relative flex flex-col items-center justify-center mb-12">
@@ -53,7 +65,7 @@ const Inicio = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
             >
-              🦉 Exploremos el Método Gráfico y Simplex 
+              🦉 Exploremos el Método Gráfico y Simplex
               <div className="absolute left-1/2 top-full -translate-x-1/2 w-4 h-4 bg-white border-l border-b border-gray-300 rotate-45 z-0" />
             </motion.div>
           )}
@@ -65,13 +77,9 @@ const Inicio = () => {
               hablando
                 ? { y: 0 }
                 : {
-                  y: [0, -10, 0],
-                  transition: {
-                    duration: 1.8,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  },
-                }
+                    y: [0, -10, 0],
+                    transition: { duration: 1.8, repeat: Infinity, ease: "easeInOut" },
+                  }
             }
           >
             <img src="/assets/buho.png" alt="Búho" className="w-32 md:w-40" />
@@ -92,9 +100,9 @@ const Inicio = () => {
             <Link
               to="/configurar2"
               className="inline-flex items-center justify-center
-                 text-lg text-white px-8 py-4 rounded-full shadow-lg transition
-                 bg-green-600 hover:bg-green-700
-                 whitespace-nowrap md:w-[280px]"
+                        text-lg text-white px-8 py-4 rounded-full shadow-lg transition
+                        bg-green-600 hover:bg-green-700
+                        whitespace-nowrap md:w-[280px]"
             >
               📊 Método Gráfico
             </Link>
@@ -105,14 +113,15 @@ const Inicio = () => {
             <Link
               to="/configurar"
               className="inline-flex items-center justify-center
-                 text-lg text-white px-8 py-4 rounded-full shadow-lg transition
-                 bg-blue-600 hover:bg-blue-700
-                 whitespace-nowrap md:w-[280px]"
+                        text-lg text-white px-8 py-4 rounded-full shadow-lg transition
+                        bg-blue-600 hover:bg-blue-700
+                        whitespace-nowrap md:w-[280px]"
             >
               🚀 Método Simplex
             </Link>
           </motion.div>
         </div>
+
         {/* Características */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl w-full px-4">
           <Feature icon="⚙️" title="Fácil de usar" />
